@@ -25,7 +25,7 @@ class Effect {
     }
   }
 
-  removeOldParticles() { 
+  removeOldParticles() {
     if (this.particles.length > 10000) {
       for (let i = this.particles.length; i > 10000; i--) {
         this.particles.shift();
@@ -36,24 +36,19 @@ class Effect {
 
 const effect = new Effect();
 
-
-window.addEventListener('mousemove', (e) => {
+document.addEventListener('touchmove', (e) => {
   effect.removeOldParticles();
-  console.log(effect.particles);
+  mousePosition.x = e.changedTouches[0].clientX;
+  mousePosition.y = e.changedTouches[0].clientY;
+  effect.init();
+});
+document.addEventListener('mousemove', (e) => {
+  effect.removeOldParticles();
+
   mousePosition.x = e.x;
   mousePosition.y = e.y;
   effect.init();
-
 });
-
-
-window.addEventListener('touchmove', (e) => {
-   effect.removeOldParticles();
-   console.log(effect.particles);
-   mousePosition.x = e.x;
-   mousePosition.y = e.y;
-   effect.init();
-})
 
 class Particle {
   constructor() {
